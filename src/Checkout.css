@@ -1,0 +1,135 @@
+.checkout{
+    height: 100vh;
+    padding-top: 30px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.checkout__heading{
+    text-align: center;
+}
+
+.checkout__table{
+    font-size: 20px;
+    margin: 100px;
+}
+
+.checkout__table--firstRow{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    font-weight: bold;
+    padding: 0 50px;
+}
+
+.checkout__table--firstRow > div{
+    width: 33%;
+    text-align: center;
+}
+
+.checkout__table--secondRow{
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+.checkout__table--secondRow > div{
+    width: 33%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkout__image img{
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: 3px 3px 10px rgba(0,0,0,0.35);
+}
+
+.checkout__buttons{
+    display: flex;
+    justify-content: space-evenly;
+    padding-bottom: 40px;
+}
+
+.checkout__button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 60px;
+    font-size: 35px;
+    border-radius: 10px;
+    border: none;
+    background-color: rgba(0,0,0,0.35);
+    text-transform: none;
+    cursor: pointer;
+}
+
+.checkout__cancel{
+    background-color:rgba(206, 76, 76);
+    color: white;
+}
+
+.checkout__approve{
+    background-color: rgb(88, 106, 206);
+    color: white;
+}
+
+@media only screen and (max-width:992px){
+
+    .checkout__table{
+        font-size: 20px;
+        margin: 50px;
+    }
+
+    .checkout__button{
+        width: 190px;
+        height: 45px;
+        font-size: 27px;
+        border-radius: 10px;
+    }
+
+    .checkout{
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width:768px){
+    .checkout{
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width:576px){
+    .checkout{
+        height: auto;
+    }
+
+    .checkout__table--firstRow{
+        display: none;
+    }
+
+    .checkout__table--secondRow{
+        flex-flow: column;
+        width: 80%;
+    }
+
+    .checkout__table--secondRow div{
+        width: 100%;
+        margin-bottom: 50px;
+        font-size: 30px;
+    }
+
+
+    .checkout__buttons{
+        display: flex;
+        flex-flow: column;
+    }
+
+    .checkout__button{
+        width: 80%;
+        margin: 10px auto;
+    }
+}

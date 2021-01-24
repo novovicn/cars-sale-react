@@ -1,0 +1,11 @@
+.sell{
+    max-width: 120rem;
+    height: 100vh;
+    margin: 0 auto;
+    position: relative;
+    background: linear-gradient(to right ,rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.3) 100%) ,url(./img/blacklambo.jpg) center no-repeat;
+    background-size: cover; 
+    background-position: fixed;
+}
+
+

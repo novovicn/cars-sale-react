@@ -1,0 +1,9 @@
+.pagination > button{
+    height: 30px;
+    width: 30px;
+    margin: 3px;
+    cursor: pointer;
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 5px;
+}

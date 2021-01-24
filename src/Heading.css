@@ -1,0 +1,13 @@
+.heading__photo{
+    height: 280px;
+    display: flex;
+    align-items: center;
+    color: white;
+    background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)) ,url(./img/heading.jpg) no-repeat center;
+    background-size: cover;
+    padding-left: 15%;
+}
+
+.heading__photo > h1{
+    font-size: 25px;
+}
