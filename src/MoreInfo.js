@@ -84,7 +84,6 @@ function MoreInfo(props) {
           <br />
           <div class="wiki-textbox">
             <p class="wiki-text">
-              {" "}
               {article?.extract?.substring(0, 1000)}...
               <a class="read-more" href={article?.fullurl} target="_blank">
                 [read more on wikipedia]

@@ -3,7 +3,7 @@ const initialState = {
     car:{},
     searchPriceLow: 0,
     searchPriceHigh: 99999,
-    searchBrand: ''
+    searchBrand: '',
 }
 
 
@@ -26,21 +26,22 @@ const reducer = (state = initialState, action) => {
                 car: action.car
             }    
         case 'SEARCH_LOW_PRICE':
-            console.log('object')
+            console.log("LOW", action.price)
             return{
                 ...state,
-                searchPriceLow: action.price
+                searchPriceLow: action.price,
             }
         case 'SEARCH_HIGH_PRICE':
-            console.log('object')
+            console.log("HIGH", action.price)
             return{
                 ...state,
-                searchBrand: action.brand
+                searchPriceHigh: action.price,
             }
         case 'SEARCH_BRAND':
             return{
                 ...state,
-                searchPriceHigh: action.price
+                searchBrand: action.brand,
+                filtered:true
             }
 
         default: 

@@ -5,6 +5,7 @@ import "./Sell.css";
 function Sell() {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+
   function submitForm() {
     setIsSubmitted(true);
   }

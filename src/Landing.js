@@ -49,7 +49,14 @@ function Landing() {
         </div>
       </div>
       <div className="landing__contact">
-          CONTACT HERE
+          <h1>CONTACT</h1>
+          <div className="landing__contact--text">
+              <ul>
+                <li><a href=""><i className="fas fa-phone"></i> +381605559659</a></li>
+                <li><a href=""><i className="fas fa-envelope"></i> novovicnenad96@gmail.com</a></li>
+                <li><a href=""><i className="fab fa-linkedin"></i> Nenad Novovic</a></li>
+              </ul>
+            </div>
       </div>
       <div className="landing__footer">
         <h4>&copy; Corpyright Nenad Novovic 2020</h4>

@@ -1,3 +1,7 @@
+.landing{
+  box-sizing: border-box;
+}
+
 .landing__main {
   width: 100%;
   height: 580px;
@@ -170,6 +174,26 @@
   padding-top: 50px;
 }
 
+.landing__contact h1{
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.landing__contact--text{
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 20px;
+  font-size: 20px;
+}
+
+.landing__contact--text li{
+  padding-bottom: 5px;
+}
+
+.landing__contact--text a{
+  color: black;
+}
+
 /* FOOTER */
 
 .landing__footer {
@@ -238,6 +262,11 @@
 }
 
 @media only screen and (max-width: 576px) {
+
+  .landing{
+    box-sizing: border-box;
+  }
+
   .landing__main--content {
     position: absolute;
     top: 10%;
@@ -281,19 +310,27 @@
 
   .landing__news--text {
     width: 100%;
-    height: 300px;
+    height: 350px;
+  }
+
+  .landing__news--text h1 {
+    margin: 0;
+    padding-bottom: 20px;
   }
 
   .landing__news--image{
     width: 100%;
     height: auto;
+    margin: 0;
   }
 
   .landing__about{
     display: block;
     width: 100%;
-    height: auto;
+    margin-top: -5px;
+    height: 250px;
   }
+
 
   .landing__about--image{
     display: none;
@@ -301,8 +338,30 @@
 
   .landing__about--text{
     width: 100%;
+    height: 250px;
+  }
+
+  .landing__about--text h1{
+    margin: 0;
+    padding-top: 30px;
+    padding-bottom: 25px;
+  }
+
+  .landing__contact{
+    padding-top: 20px;
+  }
+
+  .landing__contact h1{
+    font-size: 30px;
   }
 
 
+  .landing__contact--text a{
+    font-size: 18px;
+  }
+
+  .landing__contact {
+    height: 200px;
+  }
 
 }

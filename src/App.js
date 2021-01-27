@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./Header";
@@ -10,12 +10,19 @@ import FindCar from "./FindCar";
 import Sell from "./Sell";
 import MoreInfo from "./MoreInfo";
 import Checkout from "./Checkout";
+import SmallNav from './SmallNav';
+
+
 function App(props) {
 
-
+const [smallMenu, setSmallMenu] = useState(false);
+const [open, setOpen] = useState('');
 
   useEffect(() => {
     // will only run once when the app component loads
+    smallNavHandler();
+    setOpen('');
+    setSmallMenu(false);
     auth.onAuthStateChanged((authUser) => {
       console.log("THE USER IS >>>", authUser);
       if (authUser) {
@@ -27,10 +34,24 @@ function App(props) {
     });
   }, []);
 
+  const smallNavHandler = () => {
+    if(open){
+      setOpen('');
+      setSmallMenu(false);
+    }else{
+      setOpen('open');
+      setSmallMenu(true);
+    }
+  }
+
   return (
     <Router>
       <div className="app">
-        <Header/>
+        <button className="hamburger" onClick={smallNavHandler}>
+        <span className={"hamburger__inner " + open}></span>
+      </button>
+        {!smallMenu && <Header/>}
+        {smallMenu && <SmallNav clicked={smallNavHandler}/>}
         <Switch>
           <Route path="/auth">
             <Auth />

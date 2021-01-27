@@ -7,60 +7,82 @@ import { Pagination } from "./Pagination";
 import Spinner from "./Spinner";
 
 function Cars(props) {
+
   const [cars, setCars] = useState([]);
+  const [filtered, setFiltered] = useState(false);
+  const [filteredCars, setFilteredCars] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(6);
   const [loading, setLoading] = useState(false);
 
-  useEffect(async () => {
-    await db
+  useEffect( () => {
+    setFiltered(false);
+    
+    if(!props.user){
+      alert('Only authenticated users can buy a car')
+    }
+
+     const getCars = async () => {
+      setLoading(true);
+      await db
       .collection("cars")
-      .orderBy("created_at", "desc")
-      .onSnapshot((snapshot) =>
+      // .orderBy("created_at", "desc")
+      .onSnapshot((snapshot) => {
         setCars(
           snapshot.docs.map((doc) => ({
             id: doc.id,
             data: doc.data(),
           }))
         )
-      );
+      });
+      setLoading(false);
+    }
+
+    getCars();
+    
     console.log("cars>>>", cars);
   }, [])
 
   useEffect(() => {
+
+
+
     const carsFilteredByPrice = cars.filter((car) => {
-      console.log(props.searchPriceHigh);
-      if (parseInt(car.data.price) < parseInt(props.searchPriceHigh) &&
-        parseInt(car.data.price) > parseInt(props.searchPriceLow)) {
+      if (parseInt(car.data.price) <= parseInt(props.searchPriceHigh) &&
+        parseInt(car.data.price) >= parseInt(props.searchPriceLow)) {
         return car;
       }
     });
-    setCars(carsFilteredByPrice);
-  }, [props]);
 
-  // const filteredByName = cars.filter( car => {
-  //     if (
-  //         car.brand
-  //           .toUpperCase()
-  //           .indexOf(props.searchBrand.value.trim().toUpperCase()) != -1 ||
-  //         car.model
-  //           .toUpperCase()
-  //           .indexOf(props.searchBrand.value.trim().toUpperCase()) != -1
-  //       ) {
-  //         return car;
-  //       }
-  // })
+    const filterBrandAndPrice = carsFilteredByPrice.filter(car => {
+      if (car.data.brand.toUpperCase().indexOf(props.searchBrand.trim().toUpperCase()) != -1 ||
+                car.data.model.toUpperCase().indexOf(props.searchBrand.trim().toUpperCase()) != -1) {
+                return car;
+      }
+    })
+
+
+    console.log(cars);
+    setFilteredCars(filterBrandAndPrice);
+    setFiltered(true);
+  }, [props.searchPriceLow, props.searchBrand, props.searchPriceHigh, cars]);
+
+
+  const carsToRender = filtered? filteredCars : cars;
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = cars.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = carsToRender.slice(indexOfFirstPost, indexOfLastPost);
 
   const handlePageNumber = (num) => {
     setCurrentPage(num);
   };
 
+  console.log(filtered);
+
   return (
-    <div className="cars">
+    <div className="carsRender">
+      <div className="cars">
       {loading ? (
         <Spinner />
       ) : (
@@ -81,11 +103,16 @@ function Cars(props) {
           />
         ))
       )}
+      </div>
+      
+      <div className="pagination">
       <Pagination
         paginate={handlePageNumber}
         postsPerPage={postsPerPage}
         totalPosts={cars.length}
       />
+      </div>
+      
     </div>
   );
 }
@@ -94,6 +121,7 @@ const mapStateToProps = (state) => {
     searchPriceLow: state.searchPriceLow,
     searchPriceHigh: state.searchPriceHigh,
     searchBrand: state.searchBrand,
+    user: state.user
   };
 };
 

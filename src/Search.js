@@ -1,15 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import './Search.css';
 
 function Search(props) {
 
-  const setLowPrice = (e) => {
-    props.onSetLowPrice(e.target.value);
+  const [lowPrice, setLowPrice] = useState(0);
+  const [highPrice, setHighPrice] = useState(99999999);
+
+  const setLowPriceSearch = (e) => {
+    if(e.target.value === ''){
+      setLowPrice(0)
+    }else{
+      setLowPrice(e.target.value)
+    }
   }
 
-  const setHighPrice = (e) => {
-    props.onSetHighPrice(e.target.value);
+  const searchByPrice = () => {
+    props.onSetLowPrice(lowPrice);
+    props.onSetHighPrice(highPrice);
+  }
+    
+
+  const setHighPriceSearch = (e) => {
+    if(e.target.value === ''){
+      setHighPrice(9999999)
+    }else{
+      setHighPrice(e.target.value)
+    }
   }
 
   const setBrand = (e) => {
@@ -21,14 +38,14 @@ function Search(props) {
       <div className="search__price">
         <label htmlFor="search__price--lowest">Price </label>
         <input
-          onChange={setLowPrice}
+          onChange={setLowPriceSearch}
           type="number"
           name="search__price--lowest"
           className="search__price--lowest"
           placeholder="from"
         />
         <input
-          onChange={setHighPrice}
+          onChange={setHighPriceSearch}
           type="number"
           name="search__price--highest"
           className="search__price--highest"
@@ -38,6 +55,7 @@ function Search(props) {
           type="submit"
           className="search__price--submit"
           value="Search"
+          onClick={searchByPrice}
         ></input>
       </div>
       <div className="search__brand">

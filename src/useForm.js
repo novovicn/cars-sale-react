@@ -1,5 +1,10 @@
 import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { db } from './firebase';
+
+
+
+
 
 const useForm = (callback, validate) => {
     const[values, setValues] = useState({
@@ -11,6 +16,7 @@ const useForm = (callback, validate) => {
         vin: '',
         price: ''
     })
+    const history = useHistory();
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -39,13 +45,21 @@ const useForm = (callback, validate) => {
     useEffect(() => {
         console.log(Object.keys(errors));
        if(Object.keys(errors).length === 0 && isSubmitting){
-        db.collection("cars").add(values);
+
+        let car = {
+            ...values, 
+            created_at: Date.now()
+        }
+        db.collection("cars").add(car);
         console.log("done")
+        history.replace('/findcar')
        }
        
     }, [errors])
 
     return {handleChange, handleSubmit, values, errors}
 }
+
+
 
 export default useForm;
